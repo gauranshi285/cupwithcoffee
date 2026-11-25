@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUP2EAT - Sip It. Eat It.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#FFF6E5;color:#1E2A1E;overflow-x:hidden}
+h1,h2,.logo{font-family:'Fredoka',sans-serif}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#0B3D2E;color:white;position:sticky;top:0;z-index:10}
+.logo{font-size:26px;font-weight:700}.logo span{color:#D9A441}
+.nav-links{display:flex;gap:22px}.nav-links a{color:white;text-decoration:none;font-weight:700}
+.nav-btn{background:#D9A441;color:#0B3D2E;padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:900}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:50px 5%;background:linear-gradient(135deg,#FFF6E5,#FFE8B8);align-items:center}
+  card.appendChild(btn);
+.badge{background:#0B3D2E;color:#FFE9A8;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:800;display:inline-block}
+.hero h1{font-size:72px;line-height:.9;margin:18px 0}.hero h1 span{color:#C68B3A}
+.hero p{font-size:18px;max-width:480px}
+.hero-btns{display:flex;gap:12px;margin:22px 0}
+.btn-dark{background:#0B3D2E;color:white;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:900;display:inline-block}
+.btn-light{background:white;color:#0B3D2E;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:900;border:2px solid #0B3D2E;display:inline-block}
+.stats{display:flex;gap:30px;margin-top:10px}.stats div{display:flex;flex-direction:column}.stats b{font-size:28px}
+.cup-stage{position:relative;height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;perspective:1000px}
+.glow{position:absolute;width:340px;height:340px;background:#D9A441;filter:blur(70px);opacity:.5;border-radius:50%}
+.cup-3d{position:relative;transform-style:preserve-3d;transition:transform .15s;text-align:center;z-index:2}
+.coffee{font-size:80px;animation:float 3s ease-in-out infinite}
+.cup-body{width:220px;height:230px;background:#C68B3A;border-radius:10px 10px 90px 90px;position:relative;overflow:hidden;box-shadow:inset -20px 0 30px rgba(0,0,0,.25),0 20px 30px rgba(0,0,0,.25);transition:background .4s}
+.waffle{position:absolute;inset:0;opacity:.25;background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(0,0,0,.3) 12px 14px),repeating-linear-gradient(-45deg,transparent 0 12px,rgba(0,0,0,.3) 12px 14px)}
+.cup-label{position:absolute;top:70px;left:0;right:0;color:white;font-family:'Fredoka';font-size:26px;text-shadow:0 2px 0 rgba(0,0,0,.3)}
+.cup-base{width:150px;height:20px;background:#4A2C1A;margin:0 auto;border-radius:0 0 20px 20px}
+.steam i{display:inline-block;width:12px;height:40px;background:#ddd;border-radius:20px;opacity:.7;animation:steam 1.8s infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes steam{0%{transform:translateY(10px) scale(.8);opacity:0}50%{opacity:.8}100%{transform:translateY(-10px) scale(1.2);opacity:0}}
+.float-chip{position:absolute;background:white;padding:8px 14px;border-radius:999px;font-weight:800;box-shadow:0 10px 20px rgba(0,0,0,.15);animation:float 3s infinite}
+.c1{top:60px;left:0}.c2{top:140px;right:0}.c3{bottom:80px;left:20px}
+.hint{margin-top:20px;background:#0B3D2E;color:white;padding:8px 14px;border-radius:999px;font-size:14px}
+.marquee{background:#0B3D2E;color:#FFE9A8;padding:14px;overflow:hidden;white-space:nowrap;font-weight:900}
+.marquee span{display:inline-block;animation:scroll 18s linear infinite}
+@keyframes scroll{to{transform:translateX(-50%)}}
+section{padding:50px 5%;text-align:center}section h2{font-size:38px;margin-bottom:8px}.sub{margin-bottom:20px}
+.flavour-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.flavour{background:white;border:3px solid transparent;padding:16px;border-radius:20px;cursor:pointer;display:flex;flex-direction:column;font-size:28px;min-width:140px;box-shadow:0 10px 20px rgba(0,0,0,.08)}
+.flavour.active{border-color:#0B3D2E;transform:scale(1.05)}
+.flavour b{font-size:16px}.flavour small{font-size:13px}
+.flavour-desc{margin-top:20px;background:white;padding:16px;border-radius:16px;display:inline-block;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px;text-align:left}
+.card{background:white;padding:22px;border-radius:24px;box-shadow:0 12px 25px rgba(0,0,0,.08);transition:.2s}.card:hover{transform:translateY(-6px) rotate(-1deg)}
+.card .emoji{font-size:44px}.tag{background:#FFF0C2;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:900}.card h3{margin:10px 0 6px}.card p{color:#555;margin-bottom:10px}
+.steps{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px}.steps div{background:white;padding:22px;border-radius:20px;width:220px}.steps span{background:#D9A441;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;font-weight:900;font-size:22px;margin:0 auto 10px}
+.order{background:#0B3D2E;color:white;border-radius:30px;margin:20px 5%}
+.calc{background:white;color:#222;max-width:520px;margin:20px auto;padding:24px;border-radius:20px;display:flex;flex-direction:column;gap:14px}
+.calc input,.calc select{padding:10px;border-radius:10px;border:2px solid #ddd;width:100%;font-size:16px}
+.total{font-size:22px}.total b{color:#0B3D2E;font-size:28px}
+.contact{margin-top:16px}footer{text-align:center;padding:20px;font-weight:700}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:52px}.grid{grid-template-columns:1fr}.nav-links{display:none}.cup-stage{height:420px}}
+
+
+/* ADVANCED */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 5%;background:#FFF0C2;font-weight:800;font-size:14px}
+.topbar button{border:none;padding:8px 14px;border-radius:999px;font-weight:900;cursor:pointer;background:#0B3D2E;color:white}
+body.dark{background:#101B14;color:#FFF6E5}
+body.dark .card,body.dark .calc,body.dark .flavour-desc,body.dark .steps div,body.dark .flavour{background:#1E2E24;color:white}
+body.dark .card p{color:#ccc}
+.cart-btn{position:fixed;right:18px;bottom:18px;background:#0B3D2E;color:white;border:none;padding:14px 18px;border-radius:999px;font-weight:900;cursor:pointer;z-index:50;box-shadow:0 10px 20px rgba(0,0,0,.3)}
+.cart-panel{position:fixed;right:18px;bottom:80px;width:320px;max-width:90vw;background:white;color:#222;border-radius:20px;padding:18px;box-shadow:0 20px 40px rgba(0,0,0,.3);display:none;z-index:50}
+.cart-panel.open{display:block}
+.cart-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}
+.search-box{max-width:520px;margin:0 auto 18px;display:flex;gap:10px}
+.search-box input{flex:1;padding:12px;border-radius:999px;border:2px solid #ddd}
+.search-box select{padding:12px;border-radius:999px;border:2px solid #ddd}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.gallery div{background:white;border-radius:16px;padding:26px;font-size:34px}
+.review-box{background:white;max-width:600px;margin:0 auto;padding:24px;border-radius:20px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+.review-box p{font-size:18px}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="logo">🍫 CUP<span>2</span>EAT</div>
+  <div class="nav-links">
+    <a href="#flavours">Flavours</a><a href="#products">Products</a><a href="#how">How it works</a><a href="#order">Order</a>
+  </div>
+  <a class="nav-btn" href="https://instagram.com/cup2eat" target="_blank">@cup2eat</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <span class="badge">🌱 100% EDIBLE • ZERO WASTE • FSSAI LICENSED</span>
+    <h1>SIP IT.<br><span>EAT IT.</span></h1>
+    <p>India ka edible cup jo crunchy hai, tasty hai aur kachra <b>zero</b> hai. Chai piyo, phir cup kha jao!</p>
+    <div class="hero-btns">
+      <a href="#order" class="btn-dark">Order Now →</a>
+      <a href="#flavours" class="btn-light">Flavours Dekho</a>
+    </div>
+    <div class="stats"><div><b>₹20</b><small>per cup</small></div><div><b>0</b><small>waste</small></div><div><b>9+</b><small>states</small></div></div>
+  </div>
+
+  <div class="cup-stage" id="cupStage">
+    <div class="glow"></div>
+    <div class="cup-3d" id="cup3d">
+      <div class="steam"><i></i><i></i><i></i></div>
+      <div class="coffee">☕</div>
+      <div class="cup-body" id="cupBody">
+        <div class="waffle"></div>
+        <div class="cup-label">CUP2EAT<br><small id="cupFlavourName">CHOCOLATE</small></div>
+      </div>
+      <div class="cup-base"></div>
+    </div>
+    <div class="float-chip c1">🍫 Chocolate</div>
+    <div class="float-chip c2">🌿 Elaichi</div>
+    <div class="float-chip c3">🍦 Vanilla</div>
+    <p class="hint">👆 Cup pe mouse ghumao - 3D me ghumega!</p>
+  </div>
+</header>
+
+<div class="marquee"><span>ZERO WASTE ✦ 100% EDIBLE ✦ LEAK-PROOF ✦ PURE VEG ✦ CRUNCHY & TASTY ✦ ZERO WASTE ✦ 100% EDIBLE ✦ LEAK-PROOF ✦</span></div>
+
+<section id="flavours">
+  <h2>Apna Flavour Chuno 😋</h2>
+  <p class="sub">Kisi bhi flavour pe click karo - cup ka colour badal jayega!</p>
+  <div class="flavour-row">
+    <button class="flavour active" data-flavour="CHOCOLATE" data-color="#4A2C1A" data-desc="Rich chocolatey crunch. Chai + coffee dono ke saath best!">🍫<b>Chocolate</b><small>₹20 / cup</small></button>
+    <button class="flavour" data-flavour="VANILLA" data-color="#E8C87A" data-desc="Soft, sweet vanilla. Bacchon ka favourite, ice-cream ke saath perfect!">🍦<b>Vanilla</b><small>₹20 / cup</small></button>
+    <button class="flavour" data-flavour="ELAICHI" data-color="#7A9A3A" data-desc="Desi elaichi wali khushboo. Masala chai ke liye ekdum perfect!">🌿<b>Elaichi</b><small>₹20 / cup</small></button>
+    <button class="flavour" data-flavour="CHOCO COATED" data-color="#2B1608" data-desc="Andar se chocolate coating - zyada der tak leak-proof + extra tasty!">🍩<b>Choco Coated</b><small>₹20 / cup</small></button>
+  </div>
+  <div class="flavour-desc" id="flavourDesc">Rich chocolatey crunch. Chai + coffee dono ke saath best!</div>
+</section>
+
+<section id="products">
+  <h2>Humare Products 🧁</h2>
+  <div class="grid">
+    <div class="card"><div class="emoji">☕</div><span class="tag">BESTSELLER</span><h3>Hot & Cold Drinks Cup</h3><p>Chai, coffee, milk, cold drinks - sab ke liye.</p><b>₹20 / cup</b></div>
+    <div class="card"><div class="emoji">🍦</div><span class="tag">SUMMER PICK</span><h3>Ice-Cream Cup</h3><p>Crisp wafer cup, scoop ke saath full dessert.</p><b>₹20 / cup</b></div>
+    <div class="card"><div class="emoji">🍫</div><span class="tag">INDULGENT</span><h3>Brownie in Cup</h3><p>Fudgy brownie biscuit cup me. No plate, no waste.</p><b>₹20 / cup</b></div>
+    <div class="card"><div class="emoji">🥤</div><span class="tag">FAN FAVOURITE</span><h3>Shake & Dessert Cup</h3><p>Thick shakes, pudding, desserts - sab isme.</p><b>₹20 / cup</b></div>
+    <div class="card"><div class="emoji">📦</div><span class="tag">B2B • 396 CUP BOX</span><h3>Bulk Pack - Cafe & Events</h3><p>Cafe, stall, shaadi, fest ke liye bulk order.</p><b>DM for price</b></div>
+    <div class="card"><div class="emoji">🎁</div><span class="tag">FESTIVE</span><h3>Gift & Festive Packs</h3><p>Diwali, wedding favours, corporate gifting.</p><b>DM for price</b></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>Order Kaise Kare? 🤔</h2>
+  <div class="steps">
+    <div><span>1</span><h3>Pack Chuno</h3><p>Product + flavour select karo</p></div>
+    <div><span>2</span><h3>DM Karo</h3><p>@cup2eat ko quantity + city bhejo</p></div>
+    <div><span>3</span><h3>Hum Pack Karenge</h3><p>Safe, hygienic packing</p></div>
+    <div><span>4</span><h3>Sip & Eat!</h3><p>Piyo, khao, zero waste!</p></div>
+  </div>
+</section>
+
+<section id="order" class="order">
+  <h2>Kitne Cup Chahiye? 🧮</h2>
+  <p>Calculator - apne aap total nikal jayega</p>
+  <div class="calc">
+    <label>Kitne cups? <input type="number" id="qty" value="10" min="1"></label>
+    <label>Flavour:
+      <select id="calcFlavour"><option>Chocolate</option><option>Vanilla</option><option>Elaichi</option><option>Choco Coated</option></select>
+    </label>
+    <div class="total">Total: <b id="total">₹200</b> <small>+ delivery alag se</small></div>
+    <a class="btn-dark" id="waBtn" href="#" target="_blank">WhatsApp pe Order Karo 📱</a>
+    <a class="btn-light" href="https://instagram.com/cup2eat" target="_blank">Instagram DM @cup2eat</a>
+  </div>
+  <p class="contact">📞 WhatsApp: +91 98181 92575 &nbsp;|&nbsp; 📍 Delhi, India &nbsp;|&nbsp; 📩 Instagram: @cup2eat</p>
+</section>
+
+
+<div class="topbar"><span>🔥 Festive Offer: 50+ cups pe FREE delivery!</span><span><button onclick="document.body.classList.toggle('dark')">🌙 Dark Mode</button> <button onclick="document.getElementById('cartPanel').classList.toggle('open')">🛒 Cart (<span id='cartCount'>0</span>)</button></span></div>
+<section>
+<h2>Search Karo 🔍</h2>
+<div class="search-box"><input id="searchInput" placeholder="Chocolate, Vanilla, Brownie... search karo"><select id="priceFilter"><option value="all">All Price</option><option value="20">₹20 wale</option><option value="dm">DM wale</option></select></div>
+<p id="searchResult" style="font-weight:800"></p>
+</section>
+<section>
+<h2>Gallery 📸</h2><p class="sub">Events • Fests • Cafes me CUP2EAT</p>
+<div class="gallery"><div>🎪<br><small>College Fest</small></div><div>☕<br><small>Cafe</small></div><div>🎂<br><small>Birthday</small></div><div>💒<br><small>Wedding</small></div></div>
+</section>
+<section>
+<h2>Reviews ⭐</h2>
+<div class="review-box"><p id="reviewText">"Chai piya, phir cup kha liya! Sabne pucha ye kya hai!" - Priya, Delhi</p><br><button class="btn-dark" onclick="nextReview()">Next Review →</button></div>
+</section>
+<button class="cart-btn" onclick="document.getElementById('cartPanel').classList.toggle('open')">🛒 Cart - <span id="cartCount2">0</span> items | <span id="cartTotal">₹0</span></button>
+<div class="cart-panel" id="cartPanel"><h3>🛒 Tumhara Cart</h3><div id="cartItems"><p>Cart khaali hai. Koi product add karo!</p></div><hr><b>Total: <span id="cartTotal2">₹0</span></b><br><br><button class="btn-dark" onclick="checkoutWA()" style="width:100%">WhatsApp pe Order Karo</button></div>
+
+<footer>Made with ❤️ by CUP2EAT • Eat Your Drink • Zero Waste Mission 🌱</footer>
+<script>
+// 3D tilt - cup mouse se ghumega
+const stage = document.getElementById('cupStage');
+const cup = document.getElementById('cup3d');
+stage.addEventListener('mousemove', (e) => {
+  const r = stage.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  cup.style.transform = `rotateY(${x * 35}deg) rotateX(${-y * 25}deg) scale(1.05)`;
+});
+stage.addEventListener('mouseleave', () => cup.style.transform = 'rotateY(0) rotateX(0)');
+
+// Flavour change
+const cupBody = document.getElementById('cupBody');
+const cupName = document.getElementById('cupFlavourName');
+const desc = document.getElementById('flavourDesc');
+document.querySelectorAll('.flavour').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.flavour').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cupBody.style.background = btn.dataset.color;
+    cupName.textContent = btn.dataset.flavour;
+    desc.textContent = btn.dataset.desc;
+  });
+});
+
+// Calculator
+const qty = document.getElementById('qty');
+const totalEl = document.getElementById('total');
+const waBtn = document.getElementById('waBtn');
+const flavourSel = document.getElementById('calcFlavour');
+function updateTotal(){
+  const q = parseInt(qty.value) || 0;
+  const total = q * 20;
+  totalEl.textContent = '₹' + total;
+  const msg = encodeURIComponent(`Hi CUP2EAT! Mujhe ${q} cups chahiye - Flavour: ${flavourSel.value}. Total: Rs ${total}. Please details bhejo!`);
+  waBtn.href = `https://wa.me/919818192575?text=${msg}`;
+}
+qty.addEventListener('input', updateTotal);
+flavourSel.addEventListener('change', updateTotal);
+updateTotal();
+
+
+// ADVANCED - Cart, Search, Reviews
+let cart = [];
+const reviews = [
+'"Chai piya, phir cup kha liya! Sabne pucha ye kya hai!" - Priya, Delhi',
+'"College fest me sabse zyada bika! 200 cups 1 din me khatam!" - Rohan, Ghaziabad',
+'"Elaichi flavour + masala chai = best combo!" - Ananya, Mumbai',
+'"Zero waste, zero tension. Shaadi me sabko pasand aaya!" - Simran, Chandigarh'
+];
+let ri = 0;
+function nextReview(){ ri=(ri+1)%reviews.length; document.getElementById('reviewText').textContent = reviews[ri]; }
+function addToCart(name, price){ cart.push({name, price}); updateCart(); alert(name + ' cart me add ho gaya!'); }
+function updateCart(){
+  document.getElementById('cartCount').textContent = cart.length;
+  document.getElementById('cartCount2').textContent = cart.length;
+  let total = cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('cartTotal').textContent = '₹'+total;
+  document.getElementById('cartTotal2').textContent = '₹'+total;
+  document.getElementById('cartItems').innerHTML = cart.length ? cart.map((c,i)=>`<div class="cart-item"><span>${c.name}</span><b>₹${c.price} <button onclick="cart.splice(${i},1);updateCart()">❌</button></b></div>`).join('') : '<p>Cart khaali hai.</p>';
+}
+function checkoutWA(){
+  let msg = 'Hi CUP2EAT! Mujhe ye order chahiye:\n' + cart.map(c=>'- '+c.name+' ₹'+c.price).join('\n') + '\nTotal: ' + document.getElementById('cartTotal2').textContent;
+  window.open('https://wa.me/919818192575?text='+encodeURIComponent(msg),'_blank');
+}
+document.getElementById('searchInput').addEventListener('input', e=>{
+  let v = e.target.value.toLowerCase();
+  let found = ['Chocolate','Vanilla','Elaichi','Brownie','Ice-Cream','Shake','Bulk','Gift'].filter(x=>x.toLowerCase().includes(v));
+  document.getElementById('searchResult').textContent = v ? 'Mila: ' + (found.join(', ') || 'Kuch nahi mila') : '';
+});
+// Add-to-cart buttons inject into product cards
+document.querySelectorAll('.card').forEach(card=>{
+  let name = card.querySelector('h3')?.textContent || 'Cup';
+  let isDM = card.textContent.includes('DM for price');
+  let btn = document.createElement('button');
+  btn.className='btn-dark'; btn.style.marginTop='10px'; btn.style.width='100%'; btn.style.border='none'; btn.style.cursor='pointer';
+  btn.textContent = isDM ? 'Enquire on WhatsApp' : '🛒 Add to Cart - ₹20';
+  btn.onclick = ()=>{ if(isDM){ window.open('https://wa.me/919818192575?text='+encodeURIComponent('Hi! Mujhe '+name+' chahiye.'),'_blank')} else addToCart(name,20) };
+  card.appendChild(btn);
+});
+
+</script>
+</body>
+</html>

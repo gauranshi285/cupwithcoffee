@@ -1,0 +1,42 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#FFF6E5;color:#1E2A1E;overflow-x:hidden}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 5%;background:#0B3D2E;color:white;position:sticky;top:0;z-index:10}
+.logo{font-size:26px;font-weight:900}.logo span{color:#D9A441}
+.nav-links{display:flex;gap:22px}.nav-links a{color:white;text-decoration:none;font-weight:700}
+.nav-btn{background:#D9A441;color:#0B3D2E;padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:900}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:50px 5%;background:linear-gradient(135deg,#FFF6E5,#FFE8B8);align-items:center}
+.badge{background:#0B3D2E;color:#FFE9A8;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:800;display:inline-block}
+.hero h1{font-size:72px;line-height:.9;margin:18px 0}.hero h1 span{color:#C68B3A}
+.hero p{font-size:18px;max-width:480px}
+.hero-btns{display:flex;gap:12px;margin:22px 0}
+.btn-dark{background:#0B3D2E;color:white;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:900;display:inline-block}
+.btn-light{background:white;color:#0B3D2E;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:900;border:2px solid #0B3D2E;display:inline-block}
+.stats{display:flex;gap:30px;margin-top:10px}.stats div{display:flex;flex-direction:column}.stats b{font-size:28px}
+.cup-stage{position:relative;height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glow{position:absolute;width:340px;height:340px;background:#D9A441;filter:blur(70px);opacity:.5;border-radius:50%}
+.cup-3d{position:relative;transition:transform .15s;text-align:center;z-index:2}
+.coffee{font-size:80px}
+.cup-body{width:220px;height:230px;background:#C68B3A;border-radius:10px 10px 90px 90px;position:relative;overflow:hidden;box-shadow:inset -20px 0 30px rgba(0,0,0,.25),0 20px 30px rgba(0,0,0,.25)}
+.waffle{position:absolute;inset:0;opacity:.25;background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(0,0,0,.3) 12px 14px)}
+.cup-label{position:absolute;top:70px;left:0;right:0;color:white;font-size:26px;font-weight:900}
+.cup-base{width:150px;height:20px;background:#4A2C1A;margin:0 auto;border-radius:0 0 20px 20px}
+.float-chip{position:absolute;background:white;padding:8px 14px;border-radius:999px;font-weight:800;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+.c1{top:60px;left:0}.c2{top:140px;right:0}.c3{bottom:80px;left:20px}
+.hint{margin-top:20px;background:#0B3D2E;color:white;padding:8px 14px;border-radius:999px;font-size:14px}
+.marquee{background:#0B3D2E;color:#FFE9A8;padding:14px;overflow:hidden;white-space:nowrap;font-weight:900}
+section{padding:50px 5%;text-align:center}section h2{font-size:38px;margin-bottom:8px}
+.flavour-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.flavour{background:white;border:3px solid transparent;padding:16px;border-radius:20px;cursor:pointer;display:flex;flex-direction:column;font-size:28px;min-width:140px}
+.flavour.active{border-color:#0B3D2E;transform:scale(1.05)}
+.flavour b{font-size:16px}.flavour small{font-size:13px}
+.flavour-desc{margin-top:20px;background:white;padding:16px;border-radius:16px;display:inline-block;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px;text-align:left}
+.card{background:white;padding:22px;border-radius:24px;box-shadow:0 12px 25px rgba(0,0,0,.08)}
+.card .emoji{font-size:44px}.tag{background:#FFF0C2;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:900}.card h3{margin:10px 0 6px}.card p{color:#555;margin-bottom:10px}
+.steps{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px}.steps div{background:white;padding:22px;border-radius:20px;width:220px}.steps span{background:#D9A441;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;font-weight:900;font-size:22px;margin:0 auto 10px}
+.order{background:#0B3D2E;color:white;border-radius:30px;margin:20px 5%}
+.calc{background:white;color:#222;max-width:520px;margin:20px auto;padding:24px;border-radius:20px;display:flex;flex-direction:column;gap:14px}
+.calc input,.calc select{padding:10px;border-radius:10px;border:2px solid #ddd;width:100%;font-size:16px}
+.total{font-size:22px}.total b{color:#0B3D2E;font-size:28px}
+footer{text-align:center;padding:20px;font-weight:700}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:52px}.grid{grid-template-columns:1fr}.nav-links{display:none}}
